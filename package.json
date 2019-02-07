@@ -1,0 +1,23 @@
+{
+  "name": "node-101",
+  "version": "1.0.0",
+  "description": "Learning Node.js",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IamManchanda/node-101.git"
+  },
+  "author": "Harry Manchanda, Github/Gitlab @IamManchanda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IamManchanda/node-101/issues"
+  },
+  "homepage": "https://github.com/IamManchanda/node-101#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
