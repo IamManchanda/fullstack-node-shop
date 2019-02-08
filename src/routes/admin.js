@@ -2,9 +2,6 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const path = require('path');
-
-const rootDir = require('../utils/path');
 
 const router = express.Router();
 const urlencodedBodyParser = bodyParser.urlencoded({
@@ -14,7 +11,7 @@ const urlencodedBodyParser = bodyParser.urlencoded({
 const products = [];
 
 router.get('/add-product', function addProductPageMiddleware(request, response, next) {
-  response.sendFile(path.join(rootDir, 'views', 'add-product.html'));
+  response.render('add-product', { path: '/admin/add-product', documentTitle: `Add a Product - Harry's Shop` });
 });
 
 router.post('/add-product', urlencodedBodyParser, function submittedProductPageMiddleware(request, response, next) {
