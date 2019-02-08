@@ -1,9 +1,14 @@
+/* Routes => Shop.js */
+
 const express = require('express')
+const path = require('path');
+
+const rootDir = require('../utils/path');
 
 const router = express.Router();
 
-router.use('/', function homePageMiddleware(request, response, next) {
-  response.send('<h1>Hello Express World</h1>');
+router.get('/', function homePageMiddleware(request, response, next) {
+  response.sendFile(path.join(rootDir, 'views', 'shop.html'));
 });
 
 module.exports = router;

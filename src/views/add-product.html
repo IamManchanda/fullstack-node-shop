@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation.min.css"/>
+  <title>Add a Product</title>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu">
+          <li class="menu-text">Harry's Shop</li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/admin/add-product">Add Product</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+  <div class="grid-container fluid">
+    <div class="grid-x grid-padding-x grid-padding-y">
+      <div class="cell">
+        <main>
+          <h2 class="text-center">Add a Product</h2>
+          <form action="/admin/add-product" method="POST">
+            <div class="grid-x">
+              <div class="cell medium-10">
+                <input type="text" name="product-name" />
+              </div>
+              <div class="cell medium-2">
+                <button class="button expanded" type="submit">Add Product</button>
+              </div>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
