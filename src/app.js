@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 
 const shopRoutes = require('./routes/shop');
-const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/admin').router;
 
 const app = express();
 app.use('/assets', express.static(path.join(__dirname, 'assets')));

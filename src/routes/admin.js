@@ -11,13 +11,16 @@ const urlencodedBodyParser = bodyParser.urlencoded({
   extended: false,
 });
 
+const products = [];
+
 router.get('/add-product', function addProductPageMiddleware(request, response, next) {
   response.sendFile(path.join(rootDir, 'views', 'add-product.html'));
 });
 
 router.post('/add-product', urlencodedBodyParser, function submittedProductPageMiddleware(request, response, next) {
-  console.log(request.body);
+  const { title } = request.body;
+  products.push({ title });
   response.redirect('/');
 });
 
-module.exports = router;
+module.exports = { router, products };
