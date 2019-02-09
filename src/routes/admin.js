@@ -11,7 +11,10 @@ const urlencodedBodyParser = bodyParser.urlencoded({
 const products = [];
 
 router.get('/add-product', function addProductPageMiddleware(request, response, next) {
-  response.render('add-product', { path: '/admin/add-product', documentTitle: `Add a Product - Harry's Shop` });
+  response.render('add-product', { 
+    path: '/admin/add-product', 
+    documentTitle: `Add a Product - Harry's Shop` 
+  });
 });
 
 router.post('/add-product', urlencodedBodyParser, function submittedProductPageMiddleware(request, response, next) {
