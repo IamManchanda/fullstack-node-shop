@@ -2,9 +2,9 @@
 
 const express = require('express');
 
-const homePageController = require('../controllers/products').homePageController;
+const { homePageController } = require('../controllers/products');
 
 const router = express.Router();
 router.get('/', homePageController);
 
-module.exports = { router };
+module.exports = router;

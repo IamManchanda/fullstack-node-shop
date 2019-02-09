@@ -3,9 +3,9 @@
 const express = require('express');
 const path = require('path');
 
-const shopRoutes = require('./routes/shop').router;
-const adminRoutes = require('./routes/admin').router;
-const errorPageController = require('./controllers/error').errorPageController;
+const shopRoutes = require('./routes/shop');
+const adminRoutes = require('./routes/admin');
+const { errorPageController } = require('./controllers/error');
 
 const app = express();
 app.set('view engine', 'pug');
