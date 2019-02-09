@@ -1,10 +1,11 @@
 /* Controllers => Products */
 
-const products = [];
+const Product = require('../models/product');
 
 const homePageController = (request, response) => {
+  const products = Product.fetchAllProducts();
   response.render('shop', { 
-    products, 
+    products,
     path: '/',
     documentTitle: `Harry's Shop`,
   });
@@ -19,7 +20,8 @@ const addProductPageController = (request, response) => {
 
 const submittedProductPageController = (request, response) => {
   const { title } = request.body;
-  products.push({ title });
+  const newProduct = new Product(title)
+  newProduct.saveProduct();
   response.redirect('/');
 };
 
