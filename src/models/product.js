@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const productFile = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
+const getProducts = (error, data) => !error ? JSON.parse(data) : [];
 
 const Product = class {
   constructor(title) {
@@ -10,22 +11,16 @@ const Product = class {
   }
 
   saveProduct() {
-    const doneReadingFile = (error, data) => {
-      let products = [];
-      if (!error) products = JSON.parse(data);
+    const doneSavingProduct = (error, data) => {
+      const products = getProducts(error, data);
       products.push(this);
-      fs.writeFile(productFile, JSON.stringify(products), function getWriteFileError(error) {
-        console.error({ error });
-      });
+      fs.writeFile(productFile, JSON.stringify(products), (error) => console.error({ error }));
     };
-    fs.readFile(productFile, doneReadingFile);
+    fs.readFile(productFile, doneSavingProduct);
   }
 
   static fetchAllProducts(done) {
-    const doneFetchingAllProducts = (error, data) => {
-      if (error) done([]);
-      else done(JSON.parse(data));
-    };
+    const doneFetchingAllProducts = (error, data) => done(getProducts(error, data));
     fs.readFile(productFile, doneFetchingAllProducts);
   }
 };

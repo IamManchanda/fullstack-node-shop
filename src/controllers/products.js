@@ -10,6 +10,10 @@ const homePageController = (request, response) => {
       hasProducts,
       path: '/',
       documentTitle: `Harry's Shop`,
+      convertToKebabCase(title) {
+        // Source: https://gist.github.com/thevangelist/8ff91bac947018c9f3bfaad6487fa149#gistcomment-2183914
+        return title.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').toLowerCase();
+      },
     });
   });
 };
