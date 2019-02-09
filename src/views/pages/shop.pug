@@ -1,7 +1,7 @@
 extends ../layouts/main.pug
 
 block content
-  if products.length > 0
+  if hasProducts
     h2.text-center My Products
     .grid-x.grid-margin-x
       each currentProduct in products.reverse()

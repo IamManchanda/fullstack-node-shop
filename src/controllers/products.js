@@ -3,11 +3,14 @@
 const Product = require('../models/product');
 
 const homePageController = (request, response) => {
-  const products = Product.fetchAllProducts();
-  response.render('shop', { 
-    products,
-    path: '/',
-    documentTitle: `Harry's Shop`,
+  Product.fetchAllProducts(function doneFetchingIntoPage(products) {
+    const hasProducts = (products && products.length > 0);
+    response.render('shop', { 
+      products,
+      hasProducts,
+      path: '/',
+      documentTitle: `Harry's Shop`,
+    });
   });
 };
 
