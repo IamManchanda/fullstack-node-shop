@@ -5,7 +5,7 @@ const Product = require('../models/product');
 const homePageController = (request, response) => {
   Product.fetchAllProducts(function doneFetchingIntoPage(products) {
     const hasProducts = (products && products.length > 0);
-    response.render('shop', { 
+    response.render('shop/products-list', { 
       products,
       hasProducts,
       path: '/',
@@ -19,7 +19,7 @@ const homePageController = (request, response) => {
 };
 
 const addProductPageController = (request, response) => {
-  response.render('add-product', { 
+  response.render('admin/add-product', { 
     path: '/admin/add-product',
     documentTitle: `Add a Product - Harry's Shop`,
   });
