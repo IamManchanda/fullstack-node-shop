@@ -12,21 +12,25 @@ html(lang='en')
       .top-bar
         .top-bar-left
           ul.menu
-            li.menu-text Harry's Shop
+            li.menu-text 
+              | Best Shop
             li(class=(path === '/' ? 'is-active' : ''))
               a(href='/' class='radius')
                 | Home
             li(class=(path === '/products' ? 'is-active' : ''))
               a(href='/products' class='radius')
                 | All Products
+            li(class=(path === '/cart' ? 'is-active' : ''))
+              a(href='/cart' class='radius')
+                | My Cart
+            li(class=(path === '/orders' ? 'is-active' : ''))
+              a(href='/orders' class='radius')
+                | My Orders
         .top-bar-right
           ul.menu
             li(class=(path === '/admin/add-product' ? 'is-active' : ''))
               a(href='/admin/add-product' class='radius') 
                 | Add Product
-            li(class=(path === '/cart' ? 'is-active' : ''))
-              a(href='/cart' class='radius')
-                | My Cart
             li(class=(path === '/admin/products' ? 'is-active' : ''))
               a(href='/admin/products' class='radius')
                 | My Products

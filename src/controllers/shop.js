@@ -9,7 +9,7 @@ const homePageController = (request, response) => {
       products,
       hasProducts,
       path: '/',
-      documentTitle: `Harry's Shop`,
+      documentTitle: `Best Shop`,
     });
   });
 };
@@ -21,7 +21,7 @@ const productsPageController = (request, response) => {
       products,
       hasProducts,
       path: '/products',
-      documentTitle: `All Products | Harry's Shop`,
+      documentTitle: `All Products | Best Shop`,
     });
   });
 };
@@ -29,20 +29,28 @@ const productsPageController = (request, response) => {
 const cartPageController = (request, response) => {
   response.render('shop/cart', {
     path: '/cart',
-    documentTitle: `My Cart | Harry's Shop`,
+    documentTitle: `My Cart | Best Shop`,
+  });
+};
+
+const orderPageController = (request, response) => {
+  response.render('shop/orders', {
+    path: '/orders',
+    documentTitle: `My Orders | Best Shop`,
   });
 };
 
 const checkoutPageController = (request, response) => {
   response.render('shop/checkout', {
     path: '/checkout',
-    documentTitle: `Checkout | Harry's Shop`,
+    documentTitle: `Checkout | Best Shop`,
   });
 };
 
 module.exports = { 
   homePageController, 
   productsPageController, 
-  cartPageController, 
+  cartPageController,
+  orderPageController,
   checkoutPageController, 
 };

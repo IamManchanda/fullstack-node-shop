@@ -5,7 +5,7 @@ const Product = require('../models/product');
 const addProductPageController = (request, response) => {
   response.render('admin/add-product', { 
     path: '/admin/add-product',
-    documentTitle: `Add a Product - Harry's Shop`,
+    documentTitle: `Add a Product - Best Shop`,
   });
 };
 
@@ -16,7 +16,7 @@ const adminProductsPageController = (request, response) => {
       products,
       hasProducts,
       path: '/admin/products',
-    documentTitle: `My Products - Harry's Shop`,
+    documentTitle: `My Products - Best Shop`,
     });
   });
 };
