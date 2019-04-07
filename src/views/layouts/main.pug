@@ -14,9 +14,11 @@ html(lang='en')
           ul.menu
             li.menu-text Harry's Shop
             li(class=(path === '/' ? 'is-active' : ''))
-              a(href='/' class=(path === '/' ? 'radius' : '')) Home
+              a(href='/' class=(path === '/' ? 'radius' : '')) 
+                | Home
             li(class=(path === '/admin/add-product' ? 'is-active' : ''))
-              a(href='/admin/add-product' class=(path === '/admin/add-product' ? 'radius' : '')) Add Product
+              a(href='/admin/add-product' class=(path === '/admin/add-product' ? 'radius' : '')) 
+                | Add Product
     //- Body
     .grid-container.fluid
       .grid-x.grid-padding-x.grid-padding-y

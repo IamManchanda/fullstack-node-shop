@@ -3,7 +3,9 @@ extends ../../layouts/main.pug
 block content
   .grid-x.align-center
     .cell.medium-4.large-3
-      h2.text-center Add a Product
+      h2.text-center 
+        | Add a Product
       form(action='/admin/add-product', method='POST')
         input(type='text', name='title')
-        button.button.expanded(type='submit') Add Product
+        button.button.expanded(type='submit') 
+          | Add Product
