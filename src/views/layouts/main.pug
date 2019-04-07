@@ -19,17 +19,17 @@ html(lang='en')
             li(class=(path === '/products' ? 'is-active' : ''))
               a(href='/products' class='radius')
                 | All Products
-            li(class=(path === '/admin/products' ? 'is-active' : ''))
-              a(href='/admin/products' class='radius')
-                | My Products
         .top-bar-right
-          ul.menu   
+          ul.menu
             li(class=(path === '/admin/add-product' ? 'is-active' : ''))
               a(href='/admin/add-product' class='radius') 
                 | Add Product
             li(class=(path === '/cart' ? 'is-active' : ''))
               a(href='/cart' class='radius')
                 | My Cart
+            li(class=(path === '/admin/products' ? 'is-active' : ''))
+              a(href='/admin/products' class='radius')
+                | My Products
     //- Body
     .grid-container.fluid
       .grid-x.grid-padding-x.grid-padding-y

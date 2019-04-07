@@ -10,9 +10,14 @@ const addProductPageController = (request, response) => {
 };
 
 const adminProductsPageController = (request, response) => {
-  response.render('admin/products', {
-    path: '/admin/products',
+  Product.fetchAllProducts(function doneFetchingIntoPage(products) {
+    const hasProducts = (products && products.length > 0);
+    response.render('admin/products', {
+      products,
+      hasProducts,
+      path: '/admin/products',
     documentTitle: `My Products - Harry's Shop`,
+    });
   });
 };
 

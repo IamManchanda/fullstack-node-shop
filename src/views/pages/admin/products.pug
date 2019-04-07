@@ -1,5 +1,29 @@
 extends ../../layouts/main.pug
 
 block content
-  h2
-    | My Products
+  if hasProducts
+    h2 
+      | My Products
+    .grid-x.grid-margin-x
+      each currentProduct in products.reverse()
+        .cell.small-6.medium-4.large-3
+          .radius.bordered.shadow.card
+            img(src=currentProduct.imageUrl)
+            .card-divider
+              h5.text-center
+                strong 
+                  | $#{ currentProduct.price }
+            .card-section
+              h3 
+                | #{ currentProduct.title }
+              p 
+                | #{ currentProduct.description }
+              .button-group
+                a(href="/admin/edit-product")
+                  button.primary.radius.bordered.shadow.button
+                    | Edit
+                form(action="/admin/delete-product" method="POST")
+                  button(type="submit").alert.radius.bordered.shadow.button 
+                    | Delete
+  else
+    h2.text-center No Products Found

@@ -18,7 +18,9 @@ block content
                 | #{ currentProduct.title }
               p 
                 | #{ currentProduct.description }
-              button.primary.radius.bordered.shadow.button 
-                | Add to Cart
+              .button-group
+                form(action="/add-to-cart" method="POST")
+                  button(type="submit").primary.radius.bordered.shadow.button 
+                    | Add to Cart
   else
     h2.text-center No Products Found
