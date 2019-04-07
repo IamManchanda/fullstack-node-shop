@@ -7,17 +7,17 @@ html(lang='en')
     link(rel="stylesheet", href="/assets/css/styles.css")
     title #{ documentTitle }
   body
+    //- Header
     header
       .top-bar
         .top-bar-left
-          ul.dropdown.menu
-            li.menu-text Harry's Shop
-        .top-bar-right
           ul.menu
-            li(class=(path === '/' ? 'is-active shadow' : ''))
+            li.menu-text Harry's Shop
+            li(class=(path === '/' ? 'is-active' : ''))
               a(href='/' class=(path === '/' ? 'radius' : '')) Home
-            li(class=(path === '/admin/add-product' ? 'is-active shadow' : ''))
+            li(class=(path === '/admin/add-product' ? 'is-active' : ''))
               a(href='/admin/add-product' class=(path === '/admin/add-product' ? 'radius' : '')) Add Product
+    //- Body
     .grid-container.fluid
       .grid-x.grid-padding-x.grid-padding-y
         .cell
