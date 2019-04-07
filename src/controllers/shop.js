@@ -1,7 +1,6 @@
 /* Controllers => Shop */
 
 const Product = require('../models/product');
-const convertToKebabCase = require('../util/convertToKebabCase');
 
 const homePageController = (request, response) => {
   Product.fetchAllProducts(function doneFetchingIntoPage(products) {
@@ -9,7 +8,6 @@ const homePageController = (request, response) => {
     response.render('shop/index', {
       products,
       hasProducts,
-      convertToKebabCase,
       path: '/',
       documentTitle: `Harry's Shop`,
     });
@@ -22,7 +20,6 @@ const productsPageController = (request, response) => {
     response.render('shop/products-list', { 
       products,
       hasProducts,
-      convertToKebabCase,
       path: '/products',
       documentTitle: `All Products | Harry's Shop`,
     });

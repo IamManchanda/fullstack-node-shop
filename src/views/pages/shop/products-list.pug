@@ -8,16 +8,16 @@ block content
       each currentProduct in products.reverse()
         .cell.small-6.medium-4.large-3
           .radius.bordered.shadow.card
-            img(src=`https://placeimg.com/500/300/${convertToKebabCase(currentProduct.title)}`)
+            img(src=currentProduct.imageUrl)
             .card-divider
-              h5
+              h5.text-center
                 strong 
-                  | $99.99
+                  | $#{ currentProduct.price }
             .card-section
               h3 
                 | #{ currentProduct.title }
               p 
-                | It has an easy to override visual style, and is appropriately subdued.
+                | #{ currentProduct.description }
               button.primary.radius.bordered.shadow.button 
                 | Add to Cart
   else

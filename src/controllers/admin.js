@@ -17,8 +17,8 @@ const adminProductsPageController = (request, response) => {
 };
 
 const submittedProductPageController = (request, response) => {
-  const { title } = request.body;
-  const newProduct = new Product(title)
+  const { title, price, description } = request.body;
+  const newProduct = new Product(title, price, description)
   newProduct.saveProduct();
   response.redirect('/');
 };
