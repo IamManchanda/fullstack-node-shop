@@ -19,8 +19,6 @@ block content
               p 
                 | #{ currentProduct.description }
               .button-group
-                form(action="/add-to-cart" method="POST")
-                  button(type="submit").warning.radius.bordered.shadow.button 
-                    | Add to Cart
+                include ../../includes/add-to-cart.pug
   else
     h2.text-center No Products Found

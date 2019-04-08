@@ -22,8 +22,6 @@ block content
                 a(href=`/products/${ currentProduct.id }`)
                   button.primary.radius.bordered.shadow.button
                     | Details
-                form(action="/add-to-cart" method="POST")
-                  button(type="submit").warning.radius.bordered.shadow.button 
-                    | Add to Cart
+                include ../../includes/add-to-cart.pug
   else
     h2.text-center No Products Found

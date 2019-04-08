@@ -1,0 +1,4 @@
+form(action="/cart" method="POST")
+  button(type="submit").warning.radius.bordered.shadow.button 
+    | Add to Cart
+  input(type="hidden" name="currentProductId" value=currentProduct.id)

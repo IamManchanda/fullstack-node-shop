@@ -27,7 +27,7 @@ const productsPageController = (request, response) => {
 };
 
 const currentProductPageController = (request, response) => {
-  const currentProductId = request.params.currentProductId;
+  const { currentProductId } = request.params;
   Product.fetchAllProducts(function executeFetchingAllProducts(products) {
     const currentProduct = products.find(p => p.id === currentProductId);
     response.render('shop/product-detail', { 
@@ -59,11 +59,18 @@ const checkoutPageController = (request, response) => {
   });
 };
 
+const submitToCartPageController = (request, response) => {
+  const { currentProductId } = request.body;
+  console.log({ currentProductId });
+  response.redirect('/cart');
+};
+
 module.exports = { 
   homePageController, 
   productsPageController,
   currentProductPageController,
   cartPageController,
+  submitToCartPageController,
   orderPageController,
   checkoutPageController, 
 };
