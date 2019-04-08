@@ -1,6 +1,7 @@
 /* Models => Product */
 const fs = require('fs');
 const path = require('path');
+const uuid = require('uuid');
 
 const convertToKebabCase = require('../util/convertToKebabCase');
 
@@ -16,6 +17,7 @@ const Product = class {
   }
 
   saveProduct() {
+    this.id = uuid.v4();
     const doneSavingProduct = (error, data) => {
       const products = getProducts(error, data);
       products.push(this);

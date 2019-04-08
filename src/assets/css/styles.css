@@ -15,3 +15,7 @@
 .menu .menu-text {
   font-size: 125%;
 }
+
+.button-group .button {
+  margin-right: 0.5rem !important;
+}

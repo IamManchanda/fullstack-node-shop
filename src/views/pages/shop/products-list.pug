@@ -19,8 +19,11 @@ block content
               p 
                 | #{ currentProduct.description }
               .button-group
+                a(href=`/products/${ currentProduct.id }`)
+                  button.primary.radius.bordered.shadow.button
+                    | Details
                 form(action="/add-to-cart" method="POST")
-                  button(type="submit").primary.radius.bordered.shadow.button 
+                  button(type="submit").warning.radius.bordered.shadow.button 
                     | Add to Cart
   else
     h2.text-center No Products Found

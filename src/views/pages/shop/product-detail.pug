@@ -1,0 +1,20 @@
+extends ../../layouts/main.pug
+
+block content
+  .grid-x.align-center
+    .cell.medium-6.large-4
+      .card.radius.shadow
+        img(src=currentProduct.imageUrl)
+        .card-divider
+          h5.text-center
+            strong 
+              | $#{ currentProduct.price }
+        .card-section
+          h3 
+            | #{ currentProduct.title }
+          p 
+            | #{ currentProduct.description }
+          .button-group
+            form(action="/add-to-cart" method="POST")
+              button(type="submit").warning.radius.bordered.shadow.button 
+                | Add to Cart
