@@ -50,7 +50,6 @@ const cartPageController = (request, response, next) => {
         }
       }
       const hasProductsDataInCart = (cartProductsData && cartProductsData.length > 0);
-      console.log({ cartProductsData });
       response.render('shop/cart', {
         cartProductsData,
         hasProductsDataInCart,
