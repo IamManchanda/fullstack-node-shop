@@ -8,6 +8,7 @@ const {
   editProductPageController,
   adminProductsPageController, 
   submittedProductPageController,
+  updatedProductPageController,
 } = require('../controllers/admin');
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.get('/edit-product/:currentProductId', editProductPageController);
 router.get('/products', adminProductsPageController);
 // POST
 router.post('/add-product', urlencodedBodyParser, submittedProductPageController);
+router.post('/edit-product', urlencodedBodyParser, updatedProductPageController);
 
 module.exports = router;

@@ -10,7 +10,8 @@ const productFile = path.join(path.dirname(process.mainModule.filename), 'data',
 const getProductsData = (error, data) => !error ? JSON.parse(data) : [];
 
 const Product = class {
-  constructor(title, price, description) {
+  constructor(id, title, price, description) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.price = price;
@@ -18,11 +19,18 @@ const Product = class {
   }
 
   saveProduct() {
-    this.id = uuid.v4();
     const doneSavingProduct = (error, data) => {
       const products = getProductsData(error, data);
-      products.push(this);
-      fs.writeFile(productFile, JSON.stringify(products), (error) => console.error({ error }));
+      if (this.id) {
+        const existingProductIndex = products.findIndex(p => p.id === this.id);
+        const updatedProducts = [...products];
+        updatedProducts[existingProductIndex] = this;
+        fs.writeFile(productFile, JSON.stringify(updatedProducts), (error) => console.error({ error }));
+      } else {
+        this.id = uuid.v4();
+        products.push(this);
+        fs.writeFile(productFile, JSON.stringify(products), (error) => console.error({ error }));
+      }
     };
     fs.readFile(productFile, doneSavingProduct);
   }

@@ -19,7 +19,7 @@ block content
               p 
                 | #{ currentProduct.description }
               .button-group
-                a(href="/admin/edit-product")
+                a(href=`/admin/edit-product/${currentProduct.id}?edit=true`)
                   button.primary.radius.bordered.shadow.button
                     | Edit
                 form(action="/admin/delete-product" method="POST")

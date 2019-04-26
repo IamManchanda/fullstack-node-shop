@@ -6,16 +6,19 @@ block content
       .card.radius.shadow
         .card-section
           h2.text-center 
-            | Add a Product
-          form(action='/admin/add-product', method='POST')
+            | #{editMode ? "Edit Product" : "Add a Product"}
+          form(action=`/admin/${editMode ? "edit-product" : "add-product"}`, method='POST')
             label
               | Title
-              input(type='text', name='title' placeholder="Enter Title here!")
+              input(type='text', name='title' placeholder="Enter Title here!" value=`${editMode ? currentProduct.title : ""}`)
             label
               | Price
-              input(type='number', name='price' placeholder="Enter Price here!" step="0.01")
+              input(type='number', name='price' placeholder="Enter Price here!" step="0.01" value=`${editMode ? currentProduct.price : ""}`)
             label
               | Description
               textarea(rows="5" name='description' placeholder="Enter Description here!")
+                | #{editMode ? currentProduct.description : ""}
+            if editMode
+              input(type="hidden" name="currentProductId" value=currentProduct.id)
             button.button(type='submit') 
-              | Add Product
+              | #{editMode ? "Update Product" : "Add Product"}
