@@ -19,6 +19,11 @@
   "devDependencies": {
     "nodemon": "^1.18.9"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "src/data/*"
+    ]
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
