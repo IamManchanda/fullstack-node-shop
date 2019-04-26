@@ -22,6 +22,7 @@ const Cart = class {
         cart.products = [...cart.products, updatedProduct];
       }
       cart.totalPrice += Number(productPrice);
+      cart.totalPrice = Number(cart.totalPrice.toFixed(2));
       fs.writeFile(cartFile, JSON.stringify(cart), (error) => console.error({ error }));
     };
     fs.readFile(cartFile, doneSavingCart);
@@ -37,6 +38,7 @@ const Cart = class {
       const productQty = product.qty;
       updatedCart.products = updatedCart.products.filter(p => p.id !== id);
       updatedCart.totalPrice -= Number(productPrice) * productQty;
+      updatedCart.totalPrice = Number(updatedCart.totalPrice.toFixed(2));
       fs.writeFile(cartFile, JSON.stringify(updatedCart), (error) => console.error({ error }));
     };
     fs.readFile(cartFile, doneDeletingCart);
