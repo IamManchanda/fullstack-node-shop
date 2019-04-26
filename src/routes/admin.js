@@ -4,7 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { 
-  addProductPageController, 
+  addProductPageController,
+  editProductPageController,
   adminProductsPageController, 
   submittedProductPageController,
 } = require('../controllers/admin');
@@ -13,6 +14,7 @@ const router = express.Router();
 const urlencodedBodyParser = bodyParser.urlencoded({ extended: false });
 // GET
 router.get('/add-product', addProductPageController);
+router.get('/edit-product/:currentProductId', editProductPageController);
 router.get('/products', adminProductsPageController);
 // POST
 router.post('/add-product', urlencodedBodyParser, submittedProductPageController);

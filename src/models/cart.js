@@ -1,7 +1,6 @@
 /* Models => Product */
 const fs = require('fs');
 const path = require('path');
-const uuid = require('uuid');
 
 const cartFile = path.join(path.dirname(process.mainModule.filename), 'data', 'cart.json');
 const getCartData = (error, data) => !error ? JSON.parse(data) : { products: [], totalPrice: 0 };

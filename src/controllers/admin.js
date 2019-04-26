@@ -28,8 +28,21 @@ const submittedProductPageController = (request, response, next) => {
   response.redirect('/');
 };
 
+const editProductPageController = (request, response, next) => {
+  const { edit: editMode } = request.query;
+  if (!editMode) {
+    return response.redirect('/');
+  }
+  response.render('admin/edit-product', { 
+    path: '/admin/edit-product',
+    documentTitle: `Edit the Product - Best Shop`,
+    editing: editMode,
+  });
+};
+
 module.exports = { 
   addProductPageController, 
+  editProductPageController,
   adminProductsPageController, 
   submittedProductPageController, 
 };
