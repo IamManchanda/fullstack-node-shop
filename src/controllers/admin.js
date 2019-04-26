@@ -3,7 +3,7 @@
 const Product = require('../models/product');
 
 const addProductPageController = (request, response, next) => {
-  response.render('admin/add-product', { 
+  response.render('admin/edit-product', { 
     path: '/admin/add-product',
     documentTitle: `Add a Product - Best Shop`,
   });

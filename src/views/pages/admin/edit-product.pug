@@ -1,0 +1,21 @@
+extends ../../layouts/main.pug
+
+block content
+  .grid-x.align-center
+    .cell.medium-6.large-4
+      .card.radius.shadow
+        .card-section
+          h2.text-center 
+            | Add a Product
+          form(action='/admin/add-product', method='POST')
+            label
+              | Title
+              input(type='text', name='title' placeholder="Enter Title here!")
+            label
+              | Price
+              input(type='number', name='price' placeholder="Enter Price here!" step="0.01")
+            label
+              | Description
+              textarea(rows="5" name='description' placeholder="Enter Description here!")
+            button.button(type='submit') 
+              | Add Product
