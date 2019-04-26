@@ -1,8 +1,9 @@
 /* Controllers => Shop */
 
 const Product = require('../models/product');
+const Cart = require('../models/cart');
 
-const homePageController = (request, response) => {
+const homePageController = (request, response, next) => {
   Product.fetchAllProducts(function executeFetchingAllProducts(products) {
     const hasProducts = (products && products.length > 0);
     response.render('shop/index', {
@@ -14,7 +15,7 @@ const homePageController = (request, response) => {
   });
 };
 
-const productsPageController = (request, response) => {
+const productsPageController = (request, response, next) => {
   Product.fetchAllProducts(function executeFetchingAllProducts(products) {
     const hasProducts = (products && products.length > 0);
     response.render('shop/products-list', { 
@@ -26,10 +27,9 @@ const productsPageController = (request, response) => {
   });
 };
 
-const currentProductPageController = (request, response) => {
+const currentProductPageController = (request, response, next) => {
   const { currentProductId } = request.params;
-  Product.fetchAllProducts(function executeFetchingAllProducts(products) {
-    const currentProduct = products.find(p => p.id === currentProductId);
+  Product.findCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
     response.render('shop/product-detail', { 
       currentProduct,
       path: '/products',
@@ -38,30 +38,32 @@ const currentProductPageController = (request, response) => {
   });
 };
 
-const cartPageController = (request, response) => {
+const cartPageController = (request, response, next) => {
   response.render('shop/cart', {
     path: '/cart',
     documentTitle: `My Cart | Best Shop`,
   });
 };
 
-const orderPageController = (request, response) => {
+const orderPageController = (request, response, next) => {
   response.render('shop/orders', {
     path: '/orders',
     documentTitle: `My Orders | Best Shop`,
   });
 };
 
-const checkoutPageController = (request, response) => {
+const checkoutPageController = (request, response, next) => {
   response.render('shop/checkout', {
     path: '/checkout',
     documentTitle: `Checkout | Best Shop`,
   });
 };
 
-const submitToCartPageController = (request, response) => {
+const submitToCartPageController = (request, response, next) => {
   const { currentProductId } = request.body;
-  console.log({ currentProductId });
+  Product.findCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
+    Cart.addProduct(currentProductId, currentProduct.price);
+  });
   response.redirect('/cart');
 };
 
