@@ -6,7 +6,7 @@ const cartFile = path.join(path.dirname(process.mainModule.filename), 'data', 'c
 const getCartData = (error, data) => !error ? JSON.parse(data) : { products: [], totalPrice: 0 };
 
 const Cart = class {
-  static addProduct(id, productPrice) {
+  static addCurrentProduct(id, productPrice) {
     const doneSavingCart = (error, data) => {
       const cart = getCartData(error, data);
       const existingProductInCartIndex = cart.products.findIndex(p => p.id === id);
@@ -25,6 +25,20 @@ const Cart = class {
       fs.writeFile(cartFile, JSON.stringify(cart), (error) => console.error({ error }));
     };
     fs.readFile(cartFile, doneSavingCart);
+  }
+
+  static deleteCurrentProduct(id, productPrice) {
+    const doneDeletingCart = (error, data) => {
+      if (error) return undefined;
+      const cart = getCartData(error, data);
+      const updatedCart = { ...cart };
+      const product = updatedCart.products.find(p => p.id === id);
+      const productQty = product.qty;
+      updatedCart.products = updatedCart.products.filter(p => p.id !== id);
+      updatedCart.totalPrice -= Number(productPrice) * productQty;
+      fs.writeFile(cartFile, JSON.stringify(updatedCart), (error) => console.error({ error }));
+    };
+    fs.readFile(cartFile, doneDeletingCart);
   }
 };
 

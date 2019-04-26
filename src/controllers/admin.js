@@ -13,7 +13,7 @@ const editProductPageController = (request, response, next) => {
   const { edit: editMode } = request.query;
   if (!editMode) return response.redirect('/');
   const { currentProductId } = request.params;
-  Product.findCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
+  Product.fetchCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
     if (!currentProduct) return response.redirect('/');
     response.render('admin/edit-product', { 
       path: '/admin/edit-product',
@@ -50,10 +50,17 @@ const updatedProductPageController = (request, response, next) => {
   response.redirect('/admin/products');
 };
 
+const deleteProductPageController = (request, response, next) => {
+  const { currentProductId: id } = request.body;
+  Product.deleteCurrentProductById(id);
+  response.redirect('/admin/products');
+};
+
 module.exports = { 
   addProductPageController, 
   editProductPageController,
   adminProductsPageController, 
   submittedProductPageController,
   updatedProductPageController,
+  deleteProductPageController,
 };

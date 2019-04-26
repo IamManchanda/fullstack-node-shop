@@ -23,6 +23,7 @@ block content
                   button.primary.radius.bordered.shadow.button
                     | Edit
                 form(action="/admin/delete-product" method="POST")
+                  input(type="hidden" name="currentProductId" value=currentProduct.id)
                   button(type="submit").alert.radius.bordered.shadow.button 
                     | Delete
   else

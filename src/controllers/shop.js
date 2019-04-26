@@ -29,7 +29,7 @@ const productsPageController = (request, response, next) => {
 
 const currentProductPageController = (request, response, next) => {
   const { currentProductId } = request.params;
-  Product.findCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
+  Product.fetchCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
     response.render('shop/product-detail', { 
       currentProduct,
       path: '/products',
@@ -61,8 +61,8 @@ const checkoutPageController = (request, response, next) => {
 
 const submitToCartPageController = (request, response, next) => {
   const { currentProductId } = request.body;
-  Product.findCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
-    Cart.addProduct(currentProductId, currentProduct.price);
+  Product.fetchCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
+    Cart.addCurrentProduct(currentProductId, currentProduct.price);
   });
   response.redirect('/cart');
 };

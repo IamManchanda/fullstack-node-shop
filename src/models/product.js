@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const uuid = require('uuid');
 
+const Cart = require('./cart');
 const convertToKebabCase = require('../util/convertToKebabCase');
 
 const productFile = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
@@ -35,12 +36,27 @@ const Product = class {
     fs.readFile(productFile, doneSavingProduct);
   }
 
+  static deleteCurrentProductById(id) {
+    const doneFetchingCurrentProduct = (error, data) => {
+      const products = getProductsData(error, data);
+      const updatedProducts = products.filter(p => p.id !== id);
+      const productToBeDeleted = products.find(p => p.id === id);
+      fs.writeFile(productFile, JSON.stringify(updatedProducts), (error) => {
+        console.error({ error });
+        if (!error) {
+          Cart.deleteCurrentProduct(id, productToBeDeleted.price);
+        }
+      });
+    };
+    fs.readFile(productFile, doneFetchingCurrentProduct);
+  }
+
   static fetchAllProducts(done) {
     const doneFetchingAllProducts = (error, data) => done(getProductsData(error, data));
     fs.readFile(productFile, doneFetchingAllProducts);
   }
 
-  static findCurrentProductById(id, done) {
+  static fetchCurrentProductById(id, done) {
     const doneFetchingCurrentProduct = (error, data) => {
       const products = getProductsData(error, data);
       const product = products.find(p => p.id === id);
