@@ -1,5 +1,30 @@
 extends ../../layouts/main.pug
 
 block content
-  h2
-    | My Cart
+  if hasProductsDataInCart
+    h2
+      | My Cart
+    .grid-x.grid-margin-x
+      each currentCartProductData in cartProductsData.reverse()
+        .cell.small-6.medium-4.large-3
+          .radius.bordered.shadow.card
+            img(src=currentCartProductData.product.imageUrl)
+            .card-divider
+              h5.text-center
+                strong 
+                  | $#{ currentCartProductData.product.price }
+            .card-section
+              h3 
+                | #{ currentCartProductData.product.title }
+              p 
+                | #{ currentCartProductData.product.description }
+              p 
+                strong
+                  | Quantity: #{ currentCartProductData.qty } items
+              form(action="/delete-item-from-cart" method="POST")
+                  input(type="hidden" name="currentCartProductId" value=currentCartProductData.product.id)
+                  button(type="submit").alert.radius.bordered.shadow.button 
+                      | Delete from Cart
+  else
+    h2.text-center Cart is empty
+    

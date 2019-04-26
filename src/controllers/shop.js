@@ -39,10 +39,42 @@ const currentProductPageController = (request, response, next) => {
 };
 
 const cartPageController = (request, response, next) => {
-  response.render('shop/cart', {
-    path: '/cart',
-    documentTitle: `My Cart | Best Shop`,
+  Cart.fetchAllProductsInCart(function executeFetchingAllProductsInCart(cart) {
+    Product.fetchAllProducts(products => {
+      const cartProductsData = [];
+      for (const product of products) {
+        const cartProductData = cart.products.find(p => p.id === product.id);
+        if (cartProductData) {
+          const qty = cartProductData.qty;
+          cartProductsData.push({ product, qty });
+        }
+      }
+      const hasProductsDataInCart = (cartProductsData && cartProductsData.length > 0);
+      console.log({ cartProductsData });
+      response.render('shop/cart', {
+        cartProductsData,
+        hasProductsDataInCart,
+        path: '/cart',
+        documentTitle: `My Cart | Best Shop`,
+      });
+    });
   });
+};
+
+const submitProductToCartPageController = (request, response, next) => {
+  const { currentProductId } = request.body;
+  Product.fetchCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
+    Cart.addCurrentProduct(currentProductId, currentProduct.price);
+  });
+  response.redirect('/cart');
+};
+
+const deleteProductFromCartPageController = (request, response, next) => {
+  const { currentCartProductId } = request.body;
+  Product.fetchCurrentProductById(currentCartProductId, function executeFetchingCurrentProduct(currentProduct) {
+    Cart.deleteCurrentProduct(currentCartProductId, currentProduct.price);
+  });
+  response.redirect('/cart');
 };
 
 const orderPageController = (request, response, next) => {
@@ -59,20 +91,13 @@ const checkoutPageController = (request, response, next) => {
   });
 };
 
-const submitToCartPageController = (request, response, next) => {
-  const { currentProductId } = request.body;
-  Product.fetchCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
-    Cart.addCurrentProduct(currentProductId, currentProduct.price);
-  });
-  response.redirect('/cart');
-};
-
 module.exports = { 
   homePageController, 
   productsPageController,
   currentProductPageController,
   cartPageController,
-  submitToCartPageController,
+  submitProductToCartPageController,
+  deleteProductFromCartPageController,
   orderPageController,
   checkoutPageController, 
 };

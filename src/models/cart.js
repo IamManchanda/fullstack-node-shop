@@ -33,12 +33,21 @@ const Cart = class {
       const cart = getCartData(error, data);
       const updatedCart = { ...cart };
       const product = updatedCart.products.find(p => p.id === id);
+      if (!product) return undefined;
       const productQty = product.qty;
       updatedCart.products = updatedCart.products.filter(p => p.id !== id);
       updatedCart.totalPrice -= Number(productPrice) * productQty;
       fs.writeFile(cartFile, JSON.stringify(updatedCart), (error) => console.error({ error }));
     };
     fs.readFile(cartFile, doneDeletingCart);
+  }
+
+  static fetchAllProductsInCart(done) {
+    const doneFetchingAllProductsInCart = (error, data) => {
+      const cart = getCartData(error, data);
+      return done(cart);
+    };
+    fs.readFile(cartFile, doneFetchingAllProductsInCart);
   }
 };
 

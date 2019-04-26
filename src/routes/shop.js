@@ -8,7 +8,8 @@ const {
   productsPageController,
   currentProductPageController,
   cartPageController,
-  submitToCartPageController,
+  submitProductToCartPageController,
+  deleteProductFromCartPageController,
   orderPageController,
   checkoutPageController, 
 } = require('../controllers/shop');
@@ -23,6 +24,7 @@ router.get('/cart', cartPageController);
 router.get('/orders', orderPageController);
 router.get('/checkout', checkoutPageController);
 // POST
-router.post('/cart', urlencodedBodyParser, submitToCartPageController);
+router.post('/cart', urlencodedBodyParser, submitProductToCartPageController);
+router.post('/delete-item-from-cart', urlencodedBodyParser, deleteProductFromCartPageController);
 
 module.exports = router;
