@@ -26,11 +26,11 @@ const Product = class {
         const existingProductIndex = products.findIndex(p => p.id === this.id);
         const updatedProducts = [...products];
         updatedProducts[existingProductIndex] = this;
-        fs.writeFile(productFile, JSON.stringify(updatedProducts), (error) => console.error({ error }));
+        fs.writeFile(productFile, JSON.stringify(updatedProducts), (error) => console.error(error));
       } else {
         this.id = uuid.v4();
         products.push(this);
-        fs.writeFile(productFile, JSON.stringify(products), (error) => console.error({ error }));
+        fs.writeFile(productFile, JSON.stringify(products), (error) => console.error(error));
       }
     };
     fs.readFile(productFile, doneSavingProduct);
@@ -42,7 +42,7 @@ const Product = class {
       const updatedProducts = products.filter(p => p.id !== id);
       const productToBeDeleted = products.find(p => p.id === id);
       fs.writeFile(productFile, JSON.stringify(updatedProducts), (error) => {
-        console.error({ error });
+        console.error(error);
         if (!error) {
           Cart.deleteCurrentProduct(id, productToBeDeleted.price);
         }
