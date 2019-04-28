@@ -4,27 +4,33 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 const homePageController = (request, response, next) => {
-  Product.fetchAllProducts(function executeFetchingAllProducts(products) {
-    const hasProducts = (products && products.length > 0);
-    response.render('shop/index', {
-      products,
-      hasProducts,
-      path: '/',
-      documentTitle: `Best Shop`,
-    });
-  });
+  Product
+    .fetchAllProducts()
+    .then(([products]) => {
+      const hasProducts = (products && products.length > 0);
+      response.render('shop/index', {
+        products,
+        hasProducts,
+        path: '/',
+        documentTitle: `Best Shop`,
+      });
+    })
+    .catch(error => console.error(error));
 };
 
 const productsPageController = (request, response, next) => {
-  Product.fetchAllProducts(function executeFetchingAllProducts(products) {
-    const hasProducts = (products && products.length > 0);
-    response.render('shop/products-list', { 
-      products,
-      hasProducts,
-      path: '/products',
-      documentTitle: `All Products | Best Shop`,
-    });
-  });
+  Product
+    .fetchAllProducts()
+    .then(([products]) => {
+      const hasProducts = (products && products.length > 0);
+      response.render('shop/products-list', { 
+        products,
+        hasProducts,
+        path: '/products',
+        documentTitle: `All Products | Best Shop`,
+      });
+    })
+    .catch(error => console.error(error));
 };
 
 const currentProductPageController = (request, response, next) => {
