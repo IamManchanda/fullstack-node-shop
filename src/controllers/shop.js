@@ -35,13 +35,17 @@ const productsPageController = (request, response, next) => {
 
 const currentProductPageController = (request, response, next) => {
   const { currentProductId } = request.params;
-  Product.fetchCurrentProductById(currentProductId, function executeFetchingCurrentProduct(currentProduct) {
-    response.render('shop/product-detail', { 
-      currentProduct,
-      path: '/products',
-      documentTitle: `${currentProduct.title} | Best Shop`,
-    });
-  });
+  Product
+    .fetchCurrentProductById(currentProductId)
+    .then(([product]) => {
+      const currentProduct = product[0];
+      response.render('shop/product-detail', { 
+        currentProduct,
+        path: '/products',
+        documentTitle: `${currentProduct.title} | Best Shop`,
+      });
+    })
+    .catch(error => console.error(error));
 };
 
 const cartPageController = (request, response, next) => {

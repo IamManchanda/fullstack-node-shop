@@ -29,7 +29,10 @@ const Product = class {
   }
 
   static fetchCurrentProductById(id) {
-    
+    return mysqlDb.execute(
+      'SELECT * FROM products WHERE products.id = ?',
+      [id],
+    );
   }
 };
 
