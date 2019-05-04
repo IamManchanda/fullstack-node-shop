@@ -8,13 +8,16 @@ const Product = class {
   constructor(id, title, price, description) {
     this.id = id;
     this.title = title;
-    this.description = description;
     this.price = price;
+    this.description = description;
     this.imageUrl = `https://placeimg.com/500/300/${convertToKebabCase(title)}`;
   }
 
   saveProduct() {
-    
+    return mysqlDb.execute(
+      'INSERT INTO products (title, price, description, imageUrl) VALUES(?, ?, ?, ?)',
+      [this.title, this.price, this.description, this.imageUrl],   
+    );
   }
 
   static deleteCurrentProductById(id) {

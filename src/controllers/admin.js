@@ -39,8 +39,12 @@ const adminProductsPageController = (request, response, next) => {
 const submittedProductPageController = (request, response, next) => {
   const { title, price, description } = request.body;
   const newProduct = new Product(null, title, price, description)
-  newProduct.saveProduct();
-  response.redirect('/');
+  newProduct
+    .saveProduct()
+    .then(() => {
+      response.redirect('/');
+    })
+    .catch(error => console.error(error));
 };
 
 const updatedProductPageController = (request, response, next) => {
